@@ -26,6 +26,10 @@ import br.com.alura.forum.controller.form.TopicoForm;
 import br.com.alura.forum.modelo.Topico;
 import br.com.alura.forum.repository.CursoRepository;
 import br.com.alura.forum.repository.TopicoRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/topicos")
@@ -37,13 +41,20 @@ public class TopicosController {
 	@Autowired
 	private CursoRepository cursoRepository;
 	
+        //@RequestParam Indicamos par ao spring que esse parâmetro vem da URL e é obrigatório
 	@GetMapping
-	public List<TopicoDto> lista(String nomeCurso) {
+	public Page<TopicoDto> lista(@RequestParam(required = false) String nomeCurso, 
+                @RequestParam int pagina, 
+                @RequestParam int quantidade) {
+            
+            // Pageble é uma interface do spring
+            Pageable paginacao = PageRequest.of(pagina, quantidade);
+            
 		if (nomeCurso == null) {
-			List<Topico> topicos = topicoRepository.findAll();
+			Page<Topico> topicos = topicoRepository.findAll(paginacao);
 			return TopicoDto.converter(topicos);
 		} else {
-			List<Topico> topicos = topicoRepository.findByCursoNome(nomeCurso);
+			Page<Topico> topicos = topicoRepository.findByCursoNome(nomeCurso, paginacao);
 			return TopicoDto.converter(topicos);
 		}
 	}
