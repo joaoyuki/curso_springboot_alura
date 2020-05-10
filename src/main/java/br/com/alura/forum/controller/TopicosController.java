@@ -26,6 +26,7 @@ import br.com.alura.forum.controller.form.TopicoForm;
 import br.com.alura.forum.modelo.Topico;
 import br.com.alura.forum.repository.CursoRepository;
 import br.com.alura.forum.repository.TopicoRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -45,6 +46,7 @@ public class TopicosController {
 	
         //@RequestParam Indicamos par ao spring que esse parâmetro vem da URL e é obrigatório
 	@GetMapping
+        @Cacheable(value = "ListaDeTopicos") // No value colocamos um indicador único para esse cache
 	public Page<TopicoDto> lista(@RequestParam(required = false) String nomeCurso, 
                 @RequestParam int pagina, 
                 @RequestParam int quantidade,
