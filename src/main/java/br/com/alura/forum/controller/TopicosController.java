@@ -30,6 +30,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
@@ -60,6 +61,14 @@ public class TopicosController {
 			return TopicoDto.converter(topicos);
 		}
 	}
+        
+        // Nesse exemplo, passamos direto um Pageable do spring e temos que habilitar na classe ForumApplication essa funcionalidade
+        @GetMapping("/exemplo02")
+        public Page<TopicoDto> listaUsandoPagebleNoRequest(
+                @PageableDefault(sort = "id") Pageable paginacao) {
+            Page<Topico> topicos = topicoRepository.findAll(paginacao);
+            return TopicoDto.converter(topicos);            
+        }
 	
 	@PostMapping
 	@Transactional
