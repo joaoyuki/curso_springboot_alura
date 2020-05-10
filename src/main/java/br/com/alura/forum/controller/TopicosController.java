@@ -29,6 +29,7 @@ import br.com.alura.forum.repository.TopicoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
@@ -45,10 +46,11 @@ public class TopicosController {
 	@GetMapping
 	public Page<TopicoDto> lista(@RequestParam(required = false) String nomeCurso, 
                 @RequestParam int pagina, 
-                @RequestParam int quantidade) {
+                @RequestParam int quantidade,
+                @RequestParam String nomeDoCampoParaOrdenacao) {
             
             // Pageble é uma interface do spring
-            Pageable paginacao = PageRequest.of(pagina, quantidade);
+            Pageable paginacao = PageRequest.of(pagina, quantidade, Sort.Direction.ASC, nomeDoCampoParaOrdenacao);
             
 		if (nomeCurso == null) {
 			Page<Topico> topicos = topicoRepository.findAll(paginacao);
