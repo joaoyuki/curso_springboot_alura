@@ -1,0 +1,16 @@
+<!doctype html><html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Classe usuario</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+  
+    <script type="text/javascript">
+        function in_frame () { try { return window.self !== window.top; } catch (e) { return true; } }
+        if (!in_frame()) {
+            var page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+            window.location = 'index.html#' + page;
+        }
+    </script>
+</head>
+<body><div class="page"><h1 class="title">Classe usuario</h1><br/>@Entity<br />public class Usuario <span style="background-color:#ffff00;">implements UserDetails</span>{<br /><br />	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)<br />	private Long id;<br />	private String nome;<br />	private String email;<br />	private String senha;<br />	<br />	@ManyToMany(fetch = FetchType.EAGER)<br />    private List&lt;Perfil&gt; perfis = new ArrayList&lt;&gt;();<br /><br />	@Override<br />	public int hashCode() {<br />		final int prime = 31;<br />		int result = 1;<br />		result = prime * result + ((id == null) ? 0 : id.hashCode());<br />		return result;<br />	}<br /><br />	@Override<br />	public boolean equals(Object obj) {<br />		if (this == obj)<br />			return true;<br />		if (obj == null)<br />			return false;<br />		if (getClass() != obj.getClass())<br />			return false;<br />		Usuario other = (Usuario) obj;<br />		if (id == null) {<br />			if (other.id != null)<br />				return false;<br />		} else if (!id.equals(other.id))<br />			return false;<br />		return true;<br />	}<br /><br />	public Long getId() {<br />		return id;<br />	}<br /><br />	public void setId(Long id) {<br />		this.id = id;<br />	}<br /><br />	public String getNome() {<br />		return nome;<br />	}<br /><br />	public void setNome(String nome) {<br />		this.nome = nome;<br />	}<br /><br />	public String getEmail() {<br />		return email;<br />	}<br /><br />	public void setEmail(String email) {<br />		this.email = email;<br />	}<br /><br />	public String getSenha() {<br />		return senha;<br />	}<br /><br />	public void setSenha(String senha) {<br />		this.senha = senha;<br />	}<br /><br /><span style="background-color:#ffff00;">    @Override<br />    public Collection&lt;? extends GrantedAuthority&gt; getAuthorities() {<br />        return this.perfis;<br />    }<br /><br />    @Override<br />    public String getPassword() {<br />        return this.senha;<br />    }<br /><br />    @Override<br />    public String getUsername() {<br />        return this.email;<br />    }<br /><br />    // Deixamos tudo como TRUE pois não iremos fazer esses controles por enquanto<br />    @Override<br />    public boolean isAccountNonExpired() {<br />        return true;<br />    }<br /><br />    @Override<br />    public boolean isAccountNonLocked() {<br />        return true;<br />    }<br /><br />    @Override<br />    public boolean isCredentialsNonExpired() {<br />        return true;<br />    }<br /><br />    @Override<br />    public boolean isEnabled() {<br />        return true;<br />    }</span><br /><br />}<br /></div></body></html>

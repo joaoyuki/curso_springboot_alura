@@ -1,0 +1,16 @@
+<!doctype html><html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Classe perfil</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+  
+    <script type="text/javascript">
+        function in_frame () { try { return window.self !== window.top; } catch (e) { return true; } }
+        if (!in_frame()) {
+            var page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+            window.location = 'index.html#' + page;
+        }
+    </script>
+</head>
+<body><div class="page"><h1 class="title">Classe perfil</h1><br/>package br.com.alura.forum.modelo;<br /><br />import javax.persistence.Entity;<br />import javax.persistence.GeneratedValue;<br />import javax.persistence.GenerationType;<br />import javax.persistence.Id;<br />import org.springframework.security.core.GrantedAuthority;<br /><br />/**<br /> *<br /> * @author João<br /> */<br />@Entity<br />class Perfil <span style="background-color:#ffff00;">implements GrantedAuthority</span>{<br />    <br />    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)<br />    private long id;<br />    <br />    private String nome;<br /><br />    public long getId() {<br />        return id;<br />    }<br /><br />    public void setId(long id) {<br />        this.id = id;<br />    }<br /><br />    public String getNome() {<br />        return nome;<br />    }<br /><br />    public void setNome(String nome) {<br />        this.nome = nome;<br />    }<br /><br /><span style="background-color:#ffff00;">    @Override<br />    public String getAuthority() {<br />        return nome;<br />    }<br />    </span><br />    <br />    <br />}<br /></div></body></html>

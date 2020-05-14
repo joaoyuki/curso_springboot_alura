@@ -1,0 +1,16 @@
+<!doctype html><html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Aula 5 - ordenação</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+  
+    <script type="text/javascript">
+        function in_frame () { try { return window.self !== window.top; } catch (e) { return true; } }
+        if (!in_frame()) {
+            var page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+            window.location = 'index.html#' + page;
+        }
+    </script>
+</head>
+<body><div class="page"><h1 class="title">Aula 5 - ordenação</h1><br/>A interface Pageble já suporte a oprdenação por campos, além de também podermos indicar qual a direção, ou seja, crescente ou decrecente<br /><br />Foi adicionado um novo parâmetro chamado <strong>nomeDoCampoParaOrdenacao</strong> e passamos esse campo como parâmetro para o método da JPA que faz a pesquisa.<br /><br />Pageable paginacao = PageRequest.of(pagina, quantidade, Sort.Direction.ASC, nomeDoCampoParaOrdenacao);<br /><br /><div class="codebox"><div class="codebox">	@GetMapping<br />	<span style="color:#2e8b57;font-weight:700">public</span>&nbsp;Page&lt;TopicoDto&gt;&nbsp;lista(@RequestParam(required&nbsp;=&nbsp;<span style="color:#ff00ff;font-weight:400">false</span>)&nbsp;String&nbsp;nomeCurso,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@RequestParam&nbsp;<span style="color:#2e8b57;font-weight:700">int</span>&nbsp;pagina,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@RequestParam&nbsp;<span style="color:#2e8b57;font-weight:700">int</span>&nbsp;quantidade,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@RequestParam&nbsp;String&nbsp;nomeDoCampoParaOrdenacao)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#0000ff;font-weight:400">//&nbsp;Pageble&nbsp;é&nbsp;uma&nbsp;interface&nbsp;do&nbsp;spring</span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pageable&nbsp;paginacao&nbsp;=&nbsp;PageRequest.of(pagina,&nbsp;quantidade,&nbsp;Sort.Direction.ASC,&nbsp;nomeDoCampoParaOrdenacao);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />		<span style="color:#a52a2a;font-weight:700">if</span>&nbsp;(nomeCurso&nbsp;==&nbsp;<span style="color:#ff00ff;font-weight:400">null</span>)&nbsp;{<br />			Page&lt;Topico&gt;&nbsp;topicos&nbsp;=&nbsp;topicoRepository.findAll(paginacao);<br />			<span style="color:#a52a2a;font-weight:700">return</span>&nbsp;TopicoDto.converter(topicos);<br />		}&nbsp;<span style="color:#a52a2a;font-weight:700">else</span>&nbsp;{<br />			Page&lt;Topico&gt;&nbsp;topicos&nbsp;=&nbsp;topicoRepository.findByCursoNome(nomeCurso,&nbsp;paginacao);<br />			<span style="color:#a52a2a;font-weight:700">return</span>&nbsp;TopicoDto.converter(topicos);<br />		}<br />	}</div></div></div></body></html>

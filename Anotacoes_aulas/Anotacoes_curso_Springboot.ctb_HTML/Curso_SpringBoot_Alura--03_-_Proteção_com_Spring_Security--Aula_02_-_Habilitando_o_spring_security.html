@@ -1,0 +1,16 @@
+<!doctype html><html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Aula 02 - Habilitando o spring security</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+  
+    <script type="text/javascript">
+        function in_frame () { try { return window.self !== window.top; } catch (e) { return true; } }
+        if (!in_frame()) {
+            var page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+            window.location = 'index.html#' + page;
+        }
+    </script>
+</head>
+<body><div class="page"><h1 class="title">Aula 02 - Habilitando o spring security</h1><br/>O sprintg possui um módulo de segurança que é o Spring Security. Para habilitar esse módulo, precisamos adicionar a seguinte dependência no POM<br /><br /><div class="codebox"><div class="codebox">		&lt;dependency&gt;<br />			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br />			&lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;<br />		&lt;/dependency&gt;&nbsp;</div></div><br /><br />Agora precisamos criar uma nova classe aonde vão ficar todas as configurações do spring. Poderiamos fazer essas configurações no application.properties, mas como essas configurações podem ser dinâmicas, é mais interessante fazer em uma classe mesmo.<br /><br /><div class="codebox"><div class="codebox">@EnableWebSecurity&nbsp;<span style="color:#0000ff;font-weight:400">//&nbsp;Habilita&nbsp;o&nbsp;módulo&nbsp;de&nbsp;segurança&nbsp;na&nbsp;aplicação</span><br />@Configuration&nbsp;<span style="color:#0000ff;font-weight:400">//&nbsp;Indica&nbsp;que&nbsp;essa&nbsp;classe&nbsp;vai&nbsp;possuir&nbsp;configurações&nbsp;do&nbsp;Spring.&nbsp;Assim&nbsp;ao&nbsp;iniciar&nbsp;o&nbsp;projeto,&nbsp;o&nbsp;spring&nbsp;lê&nbsp;as&nbsp;configurações&nbsp;dessa&nbsp;classe</span><br /><span style="color:#2e8b57;font-weight:700">public</span>&nbsp;<span style="color:#2e8b57;font-weight:700">class</span>&nbsp;SecurityConfiguration&nbsp;<span style="color:#2e8b57;font-weight:700">extends</span>&nbsp;WebSecurityConfigurerAdapter{<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#0000ff;font-weight:400">//&nbsp;Só&nbsp;de&nbsp;fazer&nbsp;essas&nbsp;configurações,&nbsp;o&nbsp;spring&nbsp;security&nbsp;já&nbsp;bloqueia&nbsp;todas&nbsp;as&nbsp;url's&nbsp;do&nbsp;projeto</span><br />&nbsp;&nbsp;&nbsp;&nbsp;<br />}<br /></div></div><br /><br />Ao aplicarmos as configurações acima e tentarmos acessar nosssas API's, já vamos ter um erro:<br /><br /><img src="images\17-1.png" alt="images\17-1.png" /></div></body></html>
