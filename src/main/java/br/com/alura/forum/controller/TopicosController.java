@@ -47,24 +47,29 @@ public class TopicosController {
 	
         //@RequestParam Indicamos par ao spring que esse parâmetro vem da URL e é obrigatório
 	@GetMapping
-        @Cacheable(value = "ListaDeTopicos") // No value colocamos um indicador único para esse cache
+        
 	public Page<TopicoDto> lista(@RequestParam(required = false) String nomeCurso, 
                 @RequestParam int pagina, 
                 @RequestParam int quantidade,
                 @RequestParam String nomeDoCampoParaOrdenacao) {
-            
-            // Pageble é uma interface do spring
-            Pageable paginacao = PageRequest.of(pagina, quantidade, Sort.Direction.ASC, nomeDoCampoParaOrdenacao);
-            
-		if (nomeCurso == null) {
-			Page<Topico> topicos = topicoRepository.findAll(paginacao);
-			return TopicoDto.converter(topicos);
-		} else {
-			Page<Topico> topicos = topicoRepository.findByCursoNome(nomeCurso, paginacao);
-			return TopicoDto.converter(topicos);
-		}
+            System.out.println("METODO LISTA");
+        return teste(pagina, quantidade, nomeDoCampoParaOrdenacao, nomeCurso);
 	}
-        
+
+        @Cacheable(value = "ListaDeTopicos") // No value colocamos um indicador único para esse cache
+    public Page<TopicoDto> teste(int pagina, int quantidade, String nomeDoCampoParaOrdenacao, String nomeCurso) {
+        // Pageble é uma interface do spring
+        Pageable paginacao = PageRequest.of(pagina, quantidade, Sort.Direction.ASC, nomeDoCampoParaOrdenacao);
+        System.out.println("METODO TESTE");
+        if (nomeCurso == null) {
+            Page<Topico> topicos = topicoRepository.findAll(paginacao);
+            return TopicoDto.converter(topicos);
+        } else {
+            Page<Topico> topicos = topicoRepository.findByCursoNome(nomeCurso, paginacao);
+            return TopicoDto.converter(topicos);
+        }
+    }
+
         // Nesse exemplo, passamos direto um Pageable do spring e temos que habilitar na classe ForumApplication essa funcionalidade
         @GetMapping("/exemplo02")
         public Page<TopicoDto> listaUsandoPagebleNoRequest(
