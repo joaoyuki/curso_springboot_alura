@@ -1,0 +1,16 @@
+<!doctype html><html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>LoginForm.class</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+  
+    <script type="text/javascript">
+        function in_frame () { try { return window.self !== window.top; } catch (e) { return true; } }
+        if (!in_frame()) {
+            var page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+            window.location = 'index.html#' + page;
+        }
+    </script>
+</head>
+<body><div class="page"><h1 class="title">LoginForm.class</h1><br/>/*<br /> * To change this license header, choose License Headers in Project Properties.<br /> * To change this template file, choose Tools | Templates<br /> * and open the template in the editor.<br /> */<br />package br.com.alura.forum.controller.form;<br /><br />import javax.validation.constraints.NotEmpty;<br />import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;<br /><br />/**<br /> *<br /> * @author João<br /> */<br />public class LoginForm {<br />    <br />    @NotEmpty(message = "O e-mail é obrigatório")<br />    private String email;<br />    <br />    @NotEmpty(message = "A senha é obrigatória")<br />    private String senha;<br /><br />    public void setEmail(String email) {<br />        this.email = email;<br />    }<br /><br />    public void setSenha(String senha) {<br />        this.senha = senha;<br />    }<br /><br />    public String getEmail() {<br />        return email;<br />    }<br /><br />    public String getSenha() {<br />        return senha;<br />    }<br /><br />    public UsernamePasswordAuthenticationToken converter() {<br />        return new UsernamePasswordAuthenticationToken(email, senha);<br />    }<br />}<br /></div></body></html>

@@ -1,0 +1,16 @@
+<!doctype html><html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>AutenticacaoController.class</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+  
+    <script type="text/javascript">
+        function in_frame () { try { return window.self !== window.top; } catch (e) { return true; } }
+        if (!in_frame()) {
+            var page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+            window.location = 'index.html#' + page;
+        }
+    </script>
+</head>
+<body><div class="page"><h1 class="title">AutenticacaoController.class</h1><br/>/*<br /> * To change this license header, choose License Headers in Project Properties.<br /> * To change this template file, choose Tools | Templates<br /> * and open the template in the editor.<br /> */<br />package br.com.alura.forum.controller;<br /><br />import br.com.alura.forum.config.security.TokenService;<br />import javax.validation.Valid;<br />import org.springframework.http.ResponseEntity;<br />import org.springframework.web.bind.annotation.PostMapping;<br />import org.springframework.web.bind.annotation.RequestBody;<br />import org.springframework.web.bind.annotation.RequestMapping;<br />import org.springframework.web.bind.annotation.RestController;<br />import br.com.alura.forum.controller.form.LoginForm;<br />import org.springframework.beans.factory.annotation.Autowired;<br />import org.springframework.security.authentication.AuthenticationManager;<br />import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;<br />import org.springframework.security.core.Authentication;<br />import org.springframework.security.core.AuthenticationException;<br /><br />/**<br /> *<br /> * @author João<br /> */<br />@RestController<br />@RequestMapping("/auth")<br />public class AutenticacaoController {<br />    <br />    @Autowired<br />    private AuthenticationManager authenticationManager;<br />    <br />    @Autowired<br />    private TokenService tokenService;<br />    <br />    @PostMapping<br />    public ResponseEntity autenticar(@RequestBody @Valid LoginForm form) {<br />        <br />        try {<br />            UsernamePasswordAuthenticationToken dadosLogin = form.converter();<br />            final Authentication authenticate = authenticationManager.authenticate(dadosLogin);<br />            <br />            String token = tokenService.gerarToken(authenticate);<br />            System.out.println(token);<br />            <br />            return ResponseEntity.ok().build();<br />        } catch (AuthenticationException e) {<br />            return ResponseEntity.badRequest().build();<br />        }<br />        <br />    }<br />    <br />}<br /></div></body></html>

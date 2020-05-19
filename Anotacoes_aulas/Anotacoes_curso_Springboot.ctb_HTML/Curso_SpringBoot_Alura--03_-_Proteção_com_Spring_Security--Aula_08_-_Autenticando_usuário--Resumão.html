@@ -1,0 +1,16 @@
+<!doctype html><html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Resumão</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+  
+    <script type="text/javascript">
+        function in_frame () { try { return window.self !== window.top; } catch (e) { return true; } }
+        if (!in_frame()) {
+            var page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+            window.location = 'index.html#' + page;
+        }
+    </script>
+</head>
+<body><div class="page"><h1 class="title">Resumão</h1><br/>• Para utilizar o módulo do Spring Security, devemos adicioná-lo como dependência do projeto no arquivo pom.xml;<br />• Para habilitar e configurar o controle de autenticação e autorização do projeto, devemos criar uma classe e anotá-la com <code>@Configuration</code> e <code>@EnableWebSecurity</code>;<br />• Para liberar acesso a algum endpoint da nossa API, devemos chamar o método <code>http.authorizeRequests().antMatchers().permitAll()</code> dentro do método <code>configure(HttpSecurity http)</code>, que está na classe <code>SecurityConfigurations</code>;<br />• O método <code>anyRequest().authenticated()</code> indica ao Spring Security para bloquear todos os endpoints que não foram liberados anteriormente com o método <code>permitAll()</code>;<br />• Para implementar o controle de autenticação na API, devemos implementar a interface <code>UserDetails</code> na classe <code>Usuario</code> e também implementar a interface <code>GrantedAuthority</code> na classe <code>Perfil</code>;<br />• Para o Spring Security gerar automaticamente um formulário de login, devemos chamar o método <code>and().formLogin()</code>, dentro do método <code>configure(HttpSecurity http)</code>, que está na classe <code>SecurityConfigurations</code>;<br />• A lógica de autenticação, que consulta o usuário no banco de dados, deve implementar a interface <code>UserDetailsService</code>;<br />• Devemos indicar ao Spring Security qual o algoritmo de <code>hashing</code> de senha que utilizaremos na API, chamando o método <code>passwordEncoder()</code>, dentro do método <code>configure(AuthenticationManagerBuilder auth)</code>, que está na classe <code>SecurityConfigurations</code>.<br /></div></body></html>

@@ -1,0 +1,16 @@
+<!doctype html><html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>TokenService.class</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+  
+    <script type="text/javascript">
+        function in_frame () { try { return window.self !== window.top; } catch (e) { return true; } }
+        if (!in_frame()) {
+            var page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+            window.location = 'index.html#' + page;
+        }
+    </script>
+</head>
+<body><div class="page"><h1 class="title">TokenService.class</h1><br/>/*<br /> * To change this license header, choose License Headers in Project Properties.<br /> * To change this template file, choose Tools | Templates<br /> * and open the template in the editor.<br /> */<br />package br.com.alura.forum.config.security;<br /><br />import br.com.alura.forum.modelo.Usuario;<br />import io.jsonwebtoken.Jwts;<br />import io.jsonwebtoken.SignatureAlgorithm;<br />import java.util.Date;<br />import org.springframework.beans.factory.annotation.Value;<br />import org.springframework.security.core.Authentication;<br />import org.springframework.stereotype.Service;<br /><br />/**<br /> *<br /> * @author João<br /> */<br />@Service<br />public class TokenService {<br />    <br />    @Value("${forum.jwt.expiration}")<br />    private String expiration;<br />    <br />    @Value("${forum.jwt.secret}")<br />    private String secret;    <br /><br />    public String gerarToken(Authentication authenticate) {<br />        <br />        Usuario usuarioLogado = (Usuario) authenticate.getPrincipal();<br />        Date hoje = new Date();<br />        Date dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));<br />        return Jwts.builder()<br />                .setIssuer("API do Forum")<br />                .setSubject(usuarioLogado.getId().toString())<br />                .setIssuedAt(hoje)<br />                .setExpiration(dataExpiracao)<br />                .signWith(SignatureAlgorithm.HS256, secret)<br />                .compact()<br />                ;<br />        <br />    }<br />    <br />}<br /></div></body></html>
