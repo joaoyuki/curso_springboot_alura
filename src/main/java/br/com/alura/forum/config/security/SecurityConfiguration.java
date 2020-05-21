@@ -32,6 +32,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     @Autowired
     private AutenticacaoService autenticacaoService;
     
+    @Autowired
+    private TokenService tokenService;
+    
     // Método que configura autenticação (controle de acesso/login)
     // new BCryptPasswordEncoder() é uma classe do spring que já implementa um hash para a senha usando o algorítmo BCrypt
     @Override
@@ -52,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
             .anyRequest().authenticated()
             .and().csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and().addFilterBefore(new AutenticacaoViaTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+            .and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService), UsernamePasswordAuthenticationFilter.class)
                 ;
     }
 
