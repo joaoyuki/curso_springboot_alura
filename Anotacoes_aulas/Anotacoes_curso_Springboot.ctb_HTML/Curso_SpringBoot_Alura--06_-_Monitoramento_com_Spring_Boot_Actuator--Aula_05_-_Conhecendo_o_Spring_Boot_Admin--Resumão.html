@@ -1,0 +1,16 @@
+<!doctype html><html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Resumão</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+  
+    <script type="text/javascript">
+        function in_frame () { try { return window.self !== window.top; } catch (e) { return true; } }
+        if (!in_frame()) {
+            var page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+            window.location = 'index.html#' + page;
+        }
+    </script>
+</head>
+<body><div class="page"><h1 class="title">Resumão</h1><br/>• Para adicionar o Spring Boot Actuator no projeto, devemos adicioná-lo como uma dependência no arquivo pom.xml;<br />• Para acessar as informações disponibilizadas pelo Actuator, devemos entrar no endereço <a href="http://localhost:8080/actuator">http://localhost:8080/actuator</a>;<br />• Para liberar acesso ao Actuator no Spring Security, devemos chamar o método <code>.antMatchers(HttpMethod.GET, "/actuator/**")</code>;<br />• Para que o Actuator exponha mais informações sobre a API, devemos adicionar as propriedades <code>management.endpoint.health.show-details=always</code> e <code>management.endpoints.web.exposure.include=*</code> no arquivo application.properties;<br />• Para utilizar o Spring Boot Admin, devemos criar um projeto Spring Boot e adicionar nele os módulos <code>spring-boot-starter-web</code> e <code>spring-boot-admin-server</code>;<br />• Para trocar a porta na qual o servidor do Spring Boot Admin rodará, devemos adicionar a propriedade <code>server.port=8081</code> no arquivo application.properties;<br />• Para o Spring Boot Admin conseguir monitorar a nossa API, devemos adicionar no projeto da API o módulo <code>spring-boot-admin-client</code> e também adicionar a propriedade <code>spring.boot.admin.client.url=http://localhost:8081</code> no arquivo application.properties;<br />• Para acessar a interface gráfica do Spring Boot Admin, devemos entrar no endereço <a href="http://localhost:8081/">http://localhost:8081</a>.<br /></div></body></html>

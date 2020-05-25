@@ -1,0 +1,16 @@
+<!doctype html><html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Aula 02 - Spring Boot Actuator</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+  
+    <script type="text/javascript">
+        function in_frame () { try { return window.self !== window.top; } catch (e) { return true; } }
+        if (!in_frame()) {
+            var page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+            window.location = 'index.html#' + page;
+        }
+    </script>
+</head>
+<body><div class="page"><h1 class="title">Aula 02 - Spring Boot Actuator</h1><br/>Spring boot actuator é uma API do spring, que possui alguns endpoints que nos devolvem informações da nossa aplicação.<br /><br />Precisamos adicionar no POM:<br /><br />		&lt;dependency&gt;<br />			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br />			&lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;<br />		&lt;/dependency&gt;     <br />		<br />Só de adicionar a dependência, já podemos acessar a URL da API:<br /><br /><img src="images\50-1.png" alt="images\50-1.png" /><br /><br />Como estamos bloqueando algumas URL's, precisamos liberar essa URL para termos acesso<br /><br /><img src="images\50-2.png" alt="images\50-2.png" /><br /><br /><br />Podemos adicionar mais informações do actuator no arquivo application.properties<br /><br /><br /><br /></div></body></html>
