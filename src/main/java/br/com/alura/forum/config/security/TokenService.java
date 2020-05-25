@@ -6,6 +6,7 @@
 package br.com.alura.forum.config.security;
 
 import br.com.alura.forum.modelo.Usuario;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -54,6 +55,11 @@ public class TokenService {
         }catch(ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException | IllegalArgumentException e){
             return false;
         }
+    }
+
+    Long getIdUsuario(String token) {
+        final Claims body = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
+        return Long.parseLong(body.getSubject());
     }
     
 }
